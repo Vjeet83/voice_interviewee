@@ -100,8 +100,9 @@
 import streamlit as st
 import speech_recognition as sr
 import asyncio
-import edge_tts
-from first import get_model_response
+from gtts import gTTS
+
+from first import get_model_response 
 # -------------------------------------------------
 # Dummy Function
 # -------------------------------------------------
@@ -129,7 +130,6 @@ from first import get_model_response
 #     await tts.save(file_path)
 #     return file_path
 
-from gtts import gTTS
 
 async def speak_text(answer):
     file_path = "response.mp3"
