@@ -21,11 +21,7 @@ load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 
 # Check karo key sahi load hui ya nahi
-if api_key:
-    print("✅ Google API Key loaded successfully!")
-    print("Your API Key is:", api_key)
-else:
-    print("❌ Failed to load Google API Key. Please check your .env file.")
+
 
 # Initialize ChatGoogleGenerativeAI globally (at module level)
 # This prevents blocking errors in LangGraph
@@ -112,7 +108,7 @@ if interviewr ask you any of question bellow you have to give proper answer in b
     Honestly, that made me even more interested to work with such a creative and forward-thinking group.” )
   
 Note - give proper answer of above topic related question as written ,do not make it short
-
+Note - If you will not get proper question then ask user to provide proper question 
   """
 
 

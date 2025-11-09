@@ -112,23 +112,31 @@ from first import get_model_response
 # -------------------------------------------------   
 # Edge TTS (Male Voice) – Saves file & plays in browser
 # -------------------------------------------------   
-async def speak_text(answer):
-    voice = "en-US-ChristopherNeural"  # deeper male voice
-    rate = "-10%"                      # slower, confident
-    pitch = "-5Hz"                     # deeper tone
-    file_path = "response.mp3"
-    tts = edge_tts.Communicate(answer, voice=voice, rate=rate, pitch=pitch)
-    # ssml_text = """
-    # <speak>
-    #     <prosody rate="-10%" pitch="-5Hz" volume="+10%">Hmm...</prosody>
-    #     <break time="300ms"/>
-    #     <prosody rate="-5%" pitch="-3Hz">That’s an interesting question!</prosody>
-    # </speak>
-    # """
-    # tts = edge_tts.Communicate(ssml_text, voice="en-US-ChristopherNeural")
-    await tts.save(file_path)
-    return file_path
+# async def speak_text(answer):
+#     voice = "en-US-ChristopherNeural"  # deeper male voice
+#     rate = "-10%"                      # slower, confident
+#     pitch = "-5Hz"                     # deeper tone
+#     file_path = "response.mp3"
+#     tts = edge_tts.Communicate(answer, voice=voice, rate=rate, pitch=pitch)
+#     # ssml_text = """
+#     # <speak>
+#     #     <prosody rate="-10%" pitch="-5Hz" volume="+10%">Hmm...</prosody>
+#     #     <break time="300ms"/>
+#     #     <prosody rate="-5%" pitch="-3Hz">That’s an interesting question!</prosody>
+#     # </speak>
+#     # """
+#     # tts = edge_tts.Communicate(ssml_text, voice="en-US-ChristopherNeural")
+#     await tts.save(file_path)
+#     return file_path
 
+from gtts import gTTS
+
+async def speak_text(answer):
+    file_path = "response.mp3"
+    loop = asyncio.get_event_loop()
+    # run blocking gTTS in a thread
+    await loop.run_in_executor(None, lambda: gTTS(text=answer, lang='en').save(file_path))
+    return file_path
 
 # -------------------------------------------------
 # Streamlit App
